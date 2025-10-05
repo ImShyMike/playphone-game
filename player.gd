@@ -1,51 +1,37 @@
 extends CharacterBody2D
 
-@export var speed = 1200
-@export var jump_speed = -1500
-@export var gravity = 4000
-@export_range(0.0, 1.0) var friction = 0.1
-@export_range(0.0, 1.0) var acceleration = 0.25
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
 
-var was_on_floor = false
+@export var extraJumps = 0;
 
-func _physics_process(delta):
-	velocity.y += gravity * delta
+func _physics_process(delta: float) -> void:
+	# Gravity
+	if not is_on_floor():
+		velocity.y += get_gravity().y * delta
 
-	var dir := 0
-	if Input.is_key_pressed(KEY_LEFT):
-		dir -= 1
-	if Input.is_key_pressed(KEY_RIGHT):
-		dir += 1
+	# Jump
+	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or extraJumps > 0):
+		velocity.y = JUMP_VELOCITY
+		if extraJumps > 0:
+			extraJumps -= 1
 
-	if dir != 0:
-		velocity.x = lerp(velocity.x, float(dir) * speed, acceleration)
+	# Horizontal movement
+	var direction := Input.get_axis("ui_left", "ui_right") 
+
+	if direction != 0:
+		velocity.x = direction * SPEED
+		$AnimatedSprite2D.flip_h = direction < 0 
+		if not $AnimatedSprite2D.is_playing():
+			$AnimatedSprite2D.play("walk") 
 	else:
-		velocity.x = lerp(velocity.x, 0.0, friction)
-
-
-	if Input.is_key_pressed(KEY_UP) and is_on_floor():
-		velocity.y = jump_speed
-
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		$AnimatedSprite2D.stop()  
+		
+	print(global_position.y)
+	if global_position.y > 100:
+		var spawn = get_parent().get_child(2).get_child(0).get_node("SpawnPoint")
+		if spawn:
+			global_position = spawn.global_position
 
 	move_and_slide()
-
-	# Check for collisions after movement
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "kill":
-			_restart_scene()
-			
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "win":
-			_win_game()
-	
-	was_on_floor = is_on_floor()
-
-
-
-func _restart_scene():
-	get_tree().call_deferred("change_scene_to_file", "res://node_2d.tscn")
-
-func _win_game():
-	get_tree().call_deferred("change_scene_to_file", "res://win.tscn")

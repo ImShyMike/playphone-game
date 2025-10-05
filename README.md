@@ -1,7 +1,14 @@
-# Playphone!
+# Playphone Round 1
 
-This is the game people are working on for the [playphone](https://playphone.hackclub.com/) ysws
+This is a Game made for the first round of #playphone on the Hack Club Slack! Playphone is a community made game where others will contribute to this game in rounds, and at the end of it all, we will have an extremely polished game.
 
-To add to this game, sign up at https://hack.club/playphone, then once you get assigned a week to work, fork the repo and start contributing, then make a PR at the end of your week
+I started the first round to support my goat @Charmunk and because I'm really into game dev.
 
-More info can be found in #playphone on slack
+As of now, I've implemented the base game, this includes:
+- Layout for player, new levels, and menu
+- Dying
+- Trampoline
+- Sprites
+- More!
+
+yip yip huzzah :3
