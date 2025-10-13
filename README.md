@@ -6,11 +6,11 @@ Migeul being ever so gracious let me switch places with him so i got the second 
 
 I've implemented :
 -main menu
--controls menu
--xbox controller support
--end screen
--made everything like not blurry
--options menu
+- controls menu
+- xbox controller support
+- end screen
+- made everything like not blurry
+- options menu
 i also like made the goal estrogen (so woke ik)
 
 hip hip hooray :3c
