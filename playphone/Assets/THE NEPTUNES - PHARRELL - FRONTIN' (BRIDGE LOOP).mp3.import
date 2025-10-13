@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnfttlrne5kcn"
+path="res://.godot/imported/THE NEPTUNES - PHARRELL - FRONTIN' (BRIDGE LOOP).mp3-6029cb8327b8b284edf33386675f2466.mp3str"
+
+[deps]
+
+source_file="res://Assets/THE NEPTUNES - PHARRELL - FRONTIN' (BRIDGE LOOP).mp3"
+dest_files=["res://.godot/imported/THE NEPTUNES - PHARRELL - FRONTIN' (BRIDGE LOOP).mp3-6029cb8327b8b284edf33386675f2466.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

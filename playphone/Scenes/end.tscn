@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxu5wywqshlay"]
+
+[ext_resource type="Script" uid="uid://siu2p2gj0yl4" path="res://Scenes/quit.gd" id="1_5j2cu"]
+[ext_resource type="AudioStream" uid="uid://bbdhguyxfnyby" path="res://Assets/Congrats - Tyler, the Creator.mp3" id="2_xmt8n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmt8n"]
+bg_color = Color(0.637611, 0.54918, 0.788611, 1)
+
+[node name="End" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1154.0
+offset_bottom = 646.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xmt8n")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 215.0
+offset_top = 135.0
+offset_right = 930.0
+offset_bottom = 204.0
+theme_override_font_sizes/font_size = 50
+text = "You straight up playphoned it"
+
+[node name="quit" type="Button" parent="."]
+offset_left = 514.0
+offset_top = 322.0
+offset_right = 618.0
+offset_bottom = 399.0
+theme_override_font_sizes/font_size = 50
+text = "quit"
+script = ExtResource("1_5j2cu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_xmt8n")
+autoplay = true
+
+[connection signal="pressed" from="quit" to="quit" method="_on_pressed"]
