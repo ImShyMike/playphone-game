@@ -5,7 +5,7 @@ This is a Game made for the second round of #playphone on the Hack Club Slack! P
 Migeul being ever so gracious let me switch places with him so i got the second turn. I did alot of polishind of the base and alot of things that will be important for the game in the long run.
 
 I've implemented :
--main menu
+- main menu
 - controls menu
 - xbox controller support
 - end screen
