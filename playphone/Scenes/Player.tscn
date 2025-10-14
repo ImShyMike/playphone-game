@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbdx7p46w74iw"]
+[gd_scene load_steps=11 format=3 uid="uid://bbdx7p46w74iw"]
 
 [ext_resource type="Script" uid="uid://dxwteod6dxva6" path="res://scripts/player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://dukkk0mvxfjsw" path="res://Assets/Backgrounds/sky.png" id="2_kne1u"]
@@ -40,10 +40,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
-size = Vector2(22, 34)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ixxa"]
+height = 38.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nn08x"]
+size = Vector2(20, 14)
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_kpjcp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -63,4 +67,15 @@ frame_progress = 0.928068
 speed_scale = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_kpjcp")
+shape = SubResource("CapsuleShape2D_5ixxa")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_nn08x")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

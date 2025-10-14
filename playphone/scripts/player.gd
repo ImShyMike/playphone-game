@@ -1,24 +1,25 @@
 extends CharacterBody2D
 
+@export var maxHorisontalSpeed = 300
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
-@export var extraJumps = 0;
-
+@export var hasDash = 1
+@export var extraJumps = 20;
+@export var boost_strength: float = 700.0 
 func _physics_process(delta: float) -> void:
 	# Gravity
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 
-	# Jump
+	# Jumpand (is_on_floor() or extraJumps > 0)
 	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or extraJumps > 0):
 		velocity.y = JUMP_VELOCITY
 		if extraJumps > 0:
 			extraJumps -= 1
 
-	# Horizontal movement
+	#horizontal movement
 	var direction := Input.get_axis("ui_left", "ui_right") 
-
+	
 	if direction != 0:
 		velocity.x = direction * SPEED
 		$AnimatedSprite2D.flip_h = direction < 0 
@@ -27,11 +28,23 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		$AnimatedSprite2D.stop()  
+	
 		
-	print(global_position.y)
+	
+	
+	
 	if global_position.y > 100:
 		var spawn = get_parent().get_child(2).get_child(0).get_node("SpawnPoint")
 		if spawn:
 			global_position = spawn.global_position
-
 	move_and_slide()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	
+	velocity.y = -boost_strength
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	
+	velocity.y = -boost_strength
