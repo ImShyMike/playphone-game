@@ -1,6 +1,12 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bb88cfywp7g2"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bb88cfywp7g2"]
 
 [ext_resource type="Texture2D" uid="uid://bdo6kjjw2b4jo" path="res://Assets/Tiles/tileset.png" id="1_oia7v"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_oia7v"]
+tile_data = PackedInt32Array(0, 327681, 1, 65536, 327681, 2, 1, 327681, 1, 65537, 327681, 2, 2, 327681, 1, 65538, 327681, 2, 3, 327681, 1, 65539, 327681, 2, 4, 327681, 1, 65540, 327681, 2, 5, 327681, 1, 65541, 327681, 2, 6, 327681, 1, 65542, 327681, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_xjb8b"]
+tile_data = PackedInt32Array(0, 196609, 3, 1, 262145, 3, 2, 327681, 3)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xjb8b"]
 texture = ExtResource("1_oia7v")
@@ -81,6 +87,7 @@ texture_region_size = Vector2i(17, 16)
 6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.5, -8, 8.5, -8, 8.5, 8, -8.5, 8)
 5:3/0 = 0
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.5, -8, 8.5, -8, 8.5, 8, -8.5, 8)
+5:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8.5, -8, 8.5, -8, 8.5, 8, -8.5, 8)
 4:3/0 = 0
 4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.5, -8, 8.5, -8, 8.5, 8, -8.5, 8)
 3:3/0 = 0
@@ -88,6 +95,8 @@ texture_region_size = Vector2i(17, 16)
 3:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(8.5, -8, 8.5, 8, -8.5, 8, -8.5, -8, -8.5, -8)
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.5, -8, 8.5, -8, 8.5, 8, -8.5, 8)
+3:1/0 = 0
+3:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-8.5, -8, 8.5, -8, 8.5, 8, -8.5, 8)
 
 [resource]
 tile_size = Vector2i(17, 16)
@@ -95,4 +104,8 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_priority = 5.0
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
+physics_layer_2/collision_layer = 4
+physics_layer_2/collision_mask = 4
 sources/1 = SubResource("TileSetAtlasSource_xjb8b")
+pattern_0 = SubResource("TileMapPattern_oia7v")
+pattern_1 = SubResource("TileMapPattern_xjb8b")
