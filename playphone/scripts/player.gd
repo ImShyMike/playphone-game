@@ -17,13 +17,13 @@ func _physics_process(delta: float) -> void:
 		velocity.y += get_gravity().y * delta
 
 	# Jumpand (is_on_floor() or extraJumps > 0)
-	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or extraJumps > 0):
+	if Input.is_action_just_pressed("up") and (is_on_floor() or extraJumps > 0):
 		velocity.y = JUMP_VELOCITY
 		if extraJumps > 0:
 			extraJumps -= 1
 
 	#horizontal movement
-	var direction := Input.get_axis("ui_left", "ui_right") 
+	var direction := Input.get_axis("left", "right") 
 	
 	if direction != 0:
 		velocity.x = direction * SPEED
