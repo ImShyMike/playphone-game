@@ -2,6 +2,7 @@ extends Node2D
 
 var current_scene: Node = null
 
+
 func set_scene(scene_path: String):
 	if current_scene and current_scene.is_inside_tree():
 		current_scene.queue_free()

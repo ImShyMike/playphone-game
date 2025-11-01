@@ -1,23 +1,25 @@
 extends CharacterBody2D
 
-@export var maxHorisontalSpeed = 300;
-@export var boost_strength: float = 700.0;
-const SPEED = 300.0;
-const JUMP_VELOCITY = -400.0;
-const DASH_VELOCITY = 400;
-const DEATH_Y = 100;
-var dashCount = 1;
-var extraJumps = 1;
-var accelX = 0;
+@export var maxHorisontalSpeed = 300
+@export var boost_strength: float = 700.0
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+const DASH_VELOCITY = 400
+const DEATH_Y = 100
+var dashCount = 1
+var extraJumps = 1
+var accelX = 0
+
 
 func death():
 	var spawn = get_parent().get_child(2).get_child(0).get_node("SpawnPoint")
 	if spawn:
 		global_position = spawn.global_position
 
+
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
-	
+
 	# Gravity
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
@@ -33,27 +35,27 @@ func _physics_process(delta: float) -> void:
 		if extraJumps > 0:
 			extraJumps -= 1
 
-	if (is_on_floor()):
+	if is_on_floor():
 		extraJumps = 1
 		dashCount = 1
-	
+
 	if direction != 0:
 		velocity.x = direction * SPEED + accelX
-		$AnimatedSprite2D.flip_h = direction < 0 
+		$AnimatedSprite2D.flip_h = direction < 0
 		if not $AnimatedSprite2D.is_playing():
-			$AnimatedSprite2D.play("walk") 
+			$AnimatedSprite2D.play("walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		$AnimatedSprite2D.stop()  
+		$AnimatedSprite2D.stop()
 
-	if (is_on_floor()):
+	if is_on_floor():
 		accelX = move_toward(accelX, 0, 50)
 	else:
 		accelX = move_toward(accelX, 0, 10)
 
-	if (position.y >= DEATH_Y):
+	if position.y >= DEATH_Y:
 		death()
-	
+
 	move_and_slide()
 
 
