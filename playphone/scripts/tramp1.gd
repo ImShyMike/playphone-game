@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var boost_strength: float = 100.0  # how high it launches
+@export var boost_strength: float = 120.0  # how high it launches
 
 func _ready() -> void:
 	connect("body_entered", _on_body_entered)
