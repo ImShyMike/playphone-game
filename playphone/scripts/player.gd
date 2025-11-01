@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
-@export var maxHorisontalSpeed = 300
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const DASH_VELOCITY = 400
-@export var dashCount = 1
-@export var extraJumps = 1;
-@export var boost_strength: float = 700.0 
-@export var accelX = 0
+@export var maxHorisontalSpeed = 300;
+@export var boost_strength: float = 700.0;
+const SPEED = 300.0;
+const JUMP_VELOCITY = -400.0;
+const DASH_VELOCITY = 400;
+const DEATH_Y = 100;
+var dashCount = 1;
+var extraJumps = 1;
+var accelX = 0;
 
 func death():
 	var spawn = get_parent().get_child(2).get_child(0).get_node("SpawnPoint")
@@ -49,17 +50,18 @@ func _physics_process(delta: float) -> void:
 		accelX = move_toward(accelX, 0, 50)
 	else:
 		accelX = move_toward(accelX, 0, 10)
+
+	if (position.y >= DEATH_Y):
+		death()
 	
 	move_and_slide()
 
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
-	
 	velocity.y = -boost_strength
 
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-	
 	velocity.y = -boost_strength
 
 
