@@ -103,6 +103,9 @@ width_curve = SubResource("Curve_dewec")
 default_color = Color(0.7887323, 0.5505203, 0.9382959, 1)
 gradient = SubResource("Gradient_dewec")
 joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
 script = ExtResource("4_dewec")
 
 [connection signal="area_entered" from="BounceBox" to="." method="_on_area_2d_area_entered"]

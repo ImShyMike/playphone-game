@@ -1,6 +1,6 @@
 extends Line2D
 
-@export var maxPoints: int = 50
+@export var maxPoints: int = 40
 @export var enabled: bool = true
 var currentMaxPoints: float = 0
 
