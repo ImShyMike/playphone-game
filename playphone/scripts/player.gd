@@ -1,14 +1,16 @@
 extends CharacterBody2D
 
-@export var maxHorisontalSpeed = 300
-@export var boost_strength: float = 700.0
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const DASH_VELOCITY = 400
-const DEATH_Y = 100
-var dashCount = 1
-var extraJumps = 1
-var accelX = 0
+@export var maxHorisontalSpeed: float = 300.0
+@export var boostStrength: float = 700.0
+@export var coyoteTime: float = 0.2
+const SPEED = 300.0;
+const JUMP_VELOCITY = -400.0;
+const DASH_VELOCITY = 400;
+const DEATH_Y = 100;
+var coyoteTimer = coyoteTime;
+var dashCount = 1;
+var extraJumps = 1;
+var accelX = 0;
 
 
 func death():
@@ -30,14 +32,19 @@ func _physics_process(delta: float) -> void:
 			dashCount -= 1
 
 	# Jumpand (is_on_floor() or extraJumps > 0)
-	if Input.is_action_just_pressed("up") and (is_on_floor() or extraJumps > 0):
+	if Input.is_action_just_pressed("up") and (is_on_floor() or extraJumps > 0 or coyoteTimer > 0):
 		velocity.y = JUMP_VELOCITY
-		if extraJumps > 0:
+		if coyoteTimer <= 0 and extraJumps > 0:
 			extraJumps -= 1
+
+	print(coyoteTimer)
 
 	if is_on_floor():
 		extraJumps = 1
 		dashCount = 1
+		coyoteTimer = coyoteTime
+	else:
+		coyoteTimer -= delta
 
 	if direction != 0:
 		velocity.x = direction * SPEED + accelX
@@ -60,11 +67,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
-	velocity.y = -boost_strength
+	velocity.y = -boostStrength
 
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-	velocity.y = -boost_strength
+	velocity.y = -boostStrength
 
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
