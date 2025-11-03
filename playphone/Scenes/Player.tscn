@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbdx7p46w74iw"]
+[gd_scene load_steps=15 format=3 uid="uid://bbdx7p46w74iw"]
 
 [ext_resource type="Script" uid="uid://dxwteod6dxva6" path="res://scripts/player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://dukkk0mvxfjsw" path="res://Assets/Backgrounds/sky.png" id="2_kne1u"]
 [ext_resource type="Texture2D" uid="uid://yevns311qfnb" path="res://Assets/Triste/Hands/spr_Triste_walk_strip4.png" id="2_kpjcp"]
+[ext_resource type="Script" uid="uid://csd8tukgx7ghv" path="res://Scenes/line_2d.gd" id="4_dewec"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kne1u"]
 atlas = ExtResource("2_kpjcp")
@@ -49,6 +50,15 @@ size = Vector2(20, 14)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gntrk"]
 height = 38.0
 
+[sub_resource type="Curve" id="Curve_dewec"]
+_data = [Vector2(0, 0), 0.0, -0.31206265, 0, 0, Vector2(0.32608697, 0.5617978), 2.3341784, 2.3341784, 0, 0, Vector2(1, 1), 0.33078644, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_dewec"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1369863, 0.3219178, 0.5, 0.7123288, 0.8835617)
+colors = PackedColorArray(0.9607843, 0.6627451, 0.72156864, 1, 0.35686275, 0.80784315, 0.98039216, 1, 1, 1, 1, 1, 0.35686275, 0.80784315, 0.98039216, 1, 0.9607843, 0.6627451, 0.72156864, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_kpjcp")
@@ -64,6 +74,7 @@ scale = Vector2(3.04661, 3.04661)
 texture = ExtResource("2_kne1u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 sprite_frames = SubResource("SpriteFrames_dtqjt")
 animation = &"walk"
 frame_progress = 0.928068
@@ -86,6 +97,13 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 shape = SubResource("CapsuleShape2D_gntrk")
+
+[node name="Line2D" type="Line2D" parent="."]
+width_curve = SubResource("Curve_dewec")
+default_color = Color(0.7887323, 0.5505203, 0.9382959, 1)
+gradient = SubResource("Gradient_dewec")
+joint_mode = 1
+script = ExtResource("4_dewec")
 
 [connection signal="area_entered" from="BounceBox" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="BounceBox" to="." method="_on_area_2d_body_entered"]
