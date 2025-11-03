@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 
-	if Input.is_action_just_pressed("dash") and (dashCount > 0):
+	if Input.is_action_just_pressed("dash") and (dashCount > 0 and direction != 0):
 		accelX = DASH_VELOCITY * direction
 		if dashCount > 0:
 			dashCount -= 1
