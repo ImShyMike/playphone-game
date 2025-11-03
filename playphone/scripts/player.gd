@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-@export var maxHorisontalSpeed: float = 300.0
-@export var boostStrength: float = 700.0
-@export var coyoteTime: float = 0.2
+@export var maxHorisontalSpeed: float = 300.0;
+@export var boostStrength: float = 700.0;
+@export var coyoteTime: float = 0.2;
 const SPEED = 300.0;
 const JUMP_VELOCITY = -400.0;
 const DASH_VELOCITY = 400;
@@ -36,8 +36,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		if coyoteTimer <= 0 and extraJumps > 0:
 			extraJumps -= 1
-
-	print(coyoteTimer)
 
 	if is_on_floor():
 		extraJumps = 1

@@ -21,6 +21,6 @@ func _on_body_exited(body):
 		b = null
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if b != null:
-		b.velocity.y += -boost_strength
+		b.velocity.y = -boost_strength
